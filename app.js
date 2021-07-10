@@ -13,7 +13,7 @@ const messages = require('./src/model/messages.js')
 const nulls = require('./src/model/null.js');
 
 const recmsg = require('./src/model/revmsg.js');
-const revmsg = require('./src/model/revmsg.js');
+// const revmsg = require('./src/model/revmsg.js');
 // const revmsg = require('./src/model/revmsg.js');
 
 
@@ -248,6 +248,17 @@ app.get("/allfrnds/:id", function(req, res) {
         });
 
 });
+app.get('/name/:id', function(req, res) {
+    let id = req.params.id
+    register.findOne({ _id: id }).select('name').then(function(data) {
+        if (data) {
+            res.send(data);
+        } else {
+            console.log('not found')
+            res.send('not found')
+        }
+    });
+})
 
 
 // app.post("/revmsg", async(req, res) => {
@@ -290,6 +301,8 @@ app.post("/find", function(req, res) {
         }
     });
 });
+
+
 
 
 
