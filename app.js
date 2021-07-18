@@ -9,10 +9,12 @@ require('dotenv').config()
 const register = require('./src/model/userdata.js')
 const conversation = require('./src/model/conversation.js')
 const messages = require('./src/model/messages.js')
+const muteuser = require('./src/model/muteusers')
     // const revmessages = require('./src/model/revmsg.js')
 const nulls = require('./src/model/null.js');
 
 const recmsg = require('./src/model/revmsg.js');
+const { MulterError } = require('multer');
 // const revmsg = require('./src/model/revmsg.js');
 // const revmsg = require('./src/model/revmsg.js');
 
@@ -302,6 +304,10 @@ app.post("/find", function(req, res) {
     });
 });
 
+app.post('/delmuteuser', (req, res) => {
+    muteuser.deleteOne({ muteduser: req.body.data.muteduser, mutedby: req.body.data.mutedby })
+    console.log('done suc')
+})
 
 
 
